@@ -1,4 +1,5 @@
 import { Component } from 'react/cjs/react.production.min';
+import PropTypes from 'prop-types';
 
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -23,10 +24,11 @@ class CharInfo extends Component {
         if (!charId) {
             return
         }
-        this.setState(({loadinig: true}))
+        this.setState(({loadinig: true, error: false}))
         this.marvelServices.getCharacter(charId)
         .then(this.onCharLoaded)
         .catch(this.onError)
+        
     }
 
     componentDidUpdate(prevProps) {
@@ -118,6 +120,10 @@ const View = ({char}) => {
             </ul>
         </>
     )
+}
+
+CharInfo.propTypes = {
+    charId: PropTypes.string
 }
 
 export default CharInfo;
