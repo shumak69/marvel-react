@@ -70,6 +70,7 @@ const  CharList = (props) => {
             </ul>
         )
     }
+    console.log('f');
     const items = renderItems(charList);
 
     const errorMessage = error ? <ErrorMessage/> : null;

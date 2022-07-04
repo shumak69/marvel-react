@@ -1,50 +1,33 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import AppHeader from "../appHeader/AppHeader";
-import RandomChar from "../randomChar/RandomChar";
-import CharList from "../charList/CharList";
-import CharInfo from "../charInfo/CharInfo";
-import ErrorBoundary from "../errorBoundary/ErrorBoundary";
+// import RandomChar from "../randomChar/RandomChar";
+// import CharList from "../charList/CharList";
+// import CharInfo from "../charInfo/CharInfo";
+// import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 // import ComicsHeader from '../comicsHeader/ComicsHeader';
-import AppBanner from '../appBanner/AppBanner';
-import ComicsList from "../comicsList/ComicsList";
-import decoration from '../../resources/img/vision.png';
+// import AppBanner from '../appBanner/AppBanner';
+// import ComicsList from "../comicsList/ComicsList";
+// import decoration from '../../resources/img/vision.png';
+import { MainPage, CommicsPage } from "../pages";
 
 const App = () => {
-    const [selectedChar, setChar] = useState(null)
-    // state = {
-    //     selectedChar: null
-    // }
-
-    const onCharSelected = (id) => {
-        setChar(id);
-        // this.setState({
-        //     selectedChar: id
-        // })
-    }
+   
     return (
-        <div className="app">
+        <Router>
+            <div className="app">
             <AppHeader/>
             <main>
-                {/* <ErrorBoundary>
-                    <RandomChar/>
-                </ErrorBoundary>
-                <div className="char__content">
-                    <ErrorBoundary>
-                        <CharList onCharSelected={onCharSelected}/>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
-                        <CharInfo charId={selectedChar}/>
-                    </ErrorBoundary>
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision"/> */}
-
-                {/* <ErrorBoundary>
-
-                </ErrorBoundary> */}
-                <AppBanner/>
-                <ComicsList/>
+                <Routes>
+                    <Route path="/" element={ <MainPage />}>
+                    </Route>
+                    <Route path="/commics" element={<CommicsPage/>}>
+                        
+                    </Route>
+                </Routes>
             </main>
         </div>
+        </Router>
     ) 
 }
 
