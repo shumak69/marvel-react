@@ -9,7 +9,7 @@ import AppHeader from "../appHeader/AppHeader";
 // import AppBanner from '../appBanner/AppBanner';
 // import ComicsList from "../comicsList/ComicsList";
 // import decoration from '../../resources/img/vision.png';
-import { MainPage, CommicsPage } from "../pages";
+import { MainPage, CommicsPage, Page404, SingleComicPage } from "../pages";
 
 const App = () => {
    
@@ -24,6 +24,10 @@ const App = () => {
                     <Route path="/commics" element={<CommicsPage/>}>
                         
                     </Route>
+                    <Route path="/commics/:comicId" element={<SingleComicPage/>}>
+                        
+                    </Route>
+                    <Route path="*" element={<Page404/>}></Route>
                 </Routes>
             </main>
         </div>
