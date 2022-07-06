@@ -9,6 +9,7 @@ import './singleComicPage.scss';
 
 const SingleComicPage = () => {
     const {comicId} = useParams();
+    console.log(comicId);
     const [comic, setComic] = useState(null);
     
     const {loading, error, getComics, clearError} = useMarvelService();
@@ -27,7 +28,6 @@ const SingleComicPage = () => {
     const onComicLoaded = (comic) => {
         setComic(comic)
     }
-    console.log(comic);
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content = !(loading || error || !comic) ? <View comic={comic}/> : null;

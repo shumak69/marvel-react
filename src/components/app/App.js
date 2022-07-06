@@ -1,15 +1,13 @@
-// import { useState } from "react";
+
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import AppHeader from "../appHeader/AppHeader";
-// import RandomChar from "../randomChar/RandomChar";
-// import CharList from "../charList/CharList";
-// import CharInfo from "../charInfo/CharInfo";
-// import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-// import ComicsHeader from '../comicsHeader/ComicsHeader';
-// import AppBanner from '../appBanner/AppBanner';
-// import ComicsList from "../comicsList/ComicsList";
-// import decoration from '../../resources/img/vision.png';
-import { MainPage, CommicsPage, Page404, SingleComicPage } from "../pages";
+import Spinner from "../spinner/Spinner";
+const Page404 = lazy(() => import('../pages/404'))
+const MainPage = lazy(() => import('../pages/MainPage'));
+const CommicsPage = lazy(() => import('../pages/CommicsPage'));
+const SingleComicPage = lazy(() => import('../pages/SingleComicPage'));
+
 
 const App = () => {
    
@@ -18,17 +16,19 @@ const App = () => {
             <div className="app">
             <AppHeader/>
             <main>
-                <Routes>
-                    <Route path="/" element={ <MainPage />}>
-                    </Route>
-                    <Route path="/commics" element={<CommicsPage/>}>
-                        
-                    </Route>
-                    <Route path="/commics/:comicId" element={<SingleComicPage/>}>
-                        
-                    </Route>
-                    <Route path="*" element={<Page404/>}></Route>
-                </Routes>
+                <Suspense fallback={<Spinner/>}>
+                    <Routes>
+                        <Route path="/" element={ <MainPage />}>
+                        </Route>
+                        <Route path="/commics" element={<CommicsPage/>}>
+                            
+                        </Route>
+                        <Route path="/commics/:comicId" element={<SingleComicPage/>}>
+                            
+                        </Route>
+                        <Route path="*" element={<Page404/>}></Route>
+                    </Routes>
+                </Suspense>
             </main>
         </div>
         </Router>

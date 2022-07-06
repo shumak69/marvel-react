@@ -4,6 +4,7 @@ import useMarvelService from '../../services/MarvelServices';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 
 const  CharList = (props) => {
@@ -47,6 +48,7 @@ const  CharList = (props) => {
     }
 
     function renderItems(arr) {
+
         const items = arr.map((item, i) => {
             let isNotAvailable = null;
             if(item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
@@ -54,23 +56,31 @@ const  CharList = (props) => {
             }
             
             return (
-                <li className="char__item"
-                    key={item.id}
+                <CSSTransition timeout={500} classNames={'char__item'} in={true} 
+                key={item.id}>
+                    <li className="char__item"
                     onClick={() => {props.onCharSelected(item.id);  focusOnItem(i);}} 
                     tabIndex={0}
-                    ref={el => itemRefs.current[i] = el}>
+                    ref={el => itemRefs.current[i] = el} onKeyPress={(e) => {
+                        if (e.key === ' ' || e.key === "Enter") {
+                            props.onCharSelected(item.id);
+                            focusOnItem(i);
+                        }
+                    }}>
                         <img src={item.thumbnail} alt={item.name} style={isNotAvailable ? {objectFit: 'contain'} : null}/>
                         <div className="char__name">{item.name}</div>
                 </li>
+                </CSSTransition>
             )
         });
         return (
             <ul className="char__grid">
-                {items}
+                <TransitionGroup component={null}>
+                    {items}
+                </TransitionGroup>
             </ul>
         )
     }
-    console.log('f');
     const items = renderItems(charList);
 
     const errorMessage = error ? <ErrorMessage/> : null;
