@@ -56,7 +56,7 @@ const  CharList = (props) => {
             }
             
             return (
-                <CSSTransition timeout={500} classNames={'char__item'} in={true} 
+                <CSSTransition timeout={500} classNames={'char__item'}
                 key={item.id}>
                     <li className="char__item"
                     onClick={() => {props.onCharSelected(item.id);  focusOnItem(i);}} 
