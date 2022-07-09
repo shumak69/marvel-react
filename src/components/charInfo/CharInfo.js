@@ -24,7 +24,6 @@ const CharInfo = (props) => {
 
     useEffect(() => {
             updateChar();
-            console.log(props)
     }, [props.charId])
 
     const onCharLoaded = (char) => {
